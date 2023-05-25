@@ -33,9 +33,9 @@ function App() {
     try {
       const ToolListResource = await provider.getAccountResource(account?.address, `${moduleAddress}::todolist::TodoList`);
       setAccountHasList(true);
+      //
       const tableHandle = (ToolListResource as any).data.tasks.handle;
       const taskCounter = (ToolListResource as any).data.task_counter;
-
       let tasks = [];
       let counter = 1;
       while (counter <= taskCounter) {
@@ -57,16 +57,18 @@ function App() {
   const addNewList = async() => {
     if (!account) return [];
     setTransactionInProgress(true);
-
+    //
     const  payload = {
       type:"entry_function_payload",
       function:`${moduleAddress}::todolist::create_list`,
       type_arguments:[],
       arguments:[],
     };
+    //
     try {
       const response = await signAndSubmitTransaction(payload);
       await provider.waitForTransaction(response.hash);
+      //
       setAccountHasList(true);
     } catch(e: any) {
       setAccountHasList(false);
@@ -85,27 +87,23 @@ function App() {
       type_arguments:[],
       arguments: [newTask],
     };
-
+    //
     const latestId = tasks.length > 0 ? parseInt(tasks[tasks.length - 1].task_id) + 1 : 1;
-
     const newTaskToPush = {
       address: account.address,
       completed: false,
       content: newTask,
       task_id: latestId + "",
     };
-
+    //
     try {
       const response = await signAndSubmitTransaction(payload);
-
       await provider.waitForTransaction(response.hash);
-
+      //
       let newTasks = [...tasks];
-
       newTasks.push(newTaskToPush);
-
       setTasks(newTasks);
-
+      //
       setNewTask("");
     } catch(e: any) {
       console.log("error", e);
@@ -118,19 +116,18 @@ function App() {
     if (!account) return;
     if (!event.target.checked) return;
     setTransactionInProgress(true);
-
+    //
     const payload = {
       type: "entry_function_payload",
       function:`${moduleAddress}::todolist::complate_task`,
       type_arguments: [],
       arguments: [taskId],
     };
-
+    //
     try {
       const response = await signAndSubmitTransaction(payload);
-
       await provider.waitForTransaction(response.hash);
-
+      //
       setTasks((prevState) => {
         const newState = prevState.map((obj) => {
           if (obj.task_id === taskId) {
