@@ -5,17 +5,17 @@ export interface TokenInfo {
     readonly symbol: string;
     readonly logoURI: string;
     readonly decimals: number;
-  }
+}
 
 
-  export interface MarketInfo {
+export interface MarketInfo {
     feeToken: string;
     feeAmount: number;
     feePct: number;
     label: string;
-  }
+}
 
-  export interface RouteInfo {
+export interface RouteInfo {
     id: string;
     inAmount: JSBI;
     outAmount: JSBI;
@@ -23,11 +23,11 @@ export interface TokenInfo {
     priceImpactPct: number;
     swapMode: number;
     otherAmountThreshold: JSBI;
-  }
+}
 
-  export interface IRateParams {
+export interface IRateParams {
     inAmount: JSBI;
     inputDecimal: number;
     outAmount: JSBI;
     outputDecimal: number;
-  }
+}

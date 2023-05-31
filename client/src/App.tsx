@@ -1,6 +1,6 @@
 import { Layout, Button, Col, Row, Spin, Input, List } from 'antd';
 import * as React from 'react';
-import { useState, useEffect, ReactNode } from 'react';
+import { useState, useEffect } from 'react';
 import { WalletSelector } from '@aptos-labs/wallet-adapter-ant-design';
 import "@aptos-labs/wallet-adapter-ant-design/dist/index.css";
 import { Provider, Network } from 'aptos';
